@@ -1,0 +1,18 @@
+import axios from "axios";
+// import { config } from "dotenv";
+
+const api =  axios.create({
+   baseURL: "http://localhost:5000",
+})
+
+api.interceptors.request.use((req) =>{
+  const token = localStorage.getItem("token");
+
+   if(token){
+     req.headers["x-auth-token"] = token;
+
+   }
+   return req;
+})
+
+export default api;

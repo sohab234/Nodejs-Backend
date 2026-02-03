@@ -1,0 +1,97 @@
+.log1{
+ padding-top: 50px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ 
+}
+.log h2{
+   color: green;
+   font-family: "Hoobi", sans-serif;
+}
+.log h3{
+  font-family: "Hoobi", sans-serif;
+}
+
+.log{
+   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 12px;
+  width: 350px;
+  height: 400px;
+   /* border: 1px solid; */
+   text-align: center;
+   overflow: hidden;
+}
+.inp{
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 300px;
+  height: 30px;
+ 
+}
+.lab{
+   font-family: "Hoobi", sans-serif;
+   margin-right: 240px;
+}
+.log1 button{
+  background-color: green;
+  color: white;
+}
+.log1 a{
+   color: rgb(141, 74, 204);
+   font-family: "Hoobi" sans-serif;
+}
+.anchor{
+   margin-top: 30px;
+   font-family: "Hoobi", sans-serif;
+}
+
+
+
+/* register form */
+
+
+.log1{
+ padding-top: 50px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ 
+}
+.log h2{
+   color: green;
+   font-family: "Hoobi", sans-serif;
+}
+.log h3{
+  font-family: "Hoobi", sans-serif;
+}
+
+.log{
+   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 12px;
+  width: 350px;
+  height: 400px;
+   /* border: 1px solid; */
+   text-align: center;
+   overflow: hidden;
+}
+.inp{
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 300px;
+  height: 30px;
+ 
+}
+.lab{
+   font-family: "Hoobi", sans-serif;
+   margin-right: 240px;
+}
+.log1 button{
+  margin-top: 25px;
+  background-color: green;
+  color: white;
+}
+/* .log1 a{
+   color: rgb(141, 74, 204);
+   font-family: "Hoobi" sans-serif;
+} */
