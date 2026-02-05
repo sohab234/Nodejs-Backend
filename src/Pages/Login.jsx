@@ -20,7 +20,7 @@ export default function Login() {
 
     try {
       const res = await api.post("/api/v1/user/login", { username, password })
-       console.log(res.data);
+       console.log("hello" + res.data);
        
       localStorage.setItem("token", res.data.Token)
       alert("Login Successfully")

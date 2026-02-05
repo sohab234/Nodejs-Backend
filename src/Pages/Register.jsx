@@ -30,8 +30,8 @@
     // } else {
     //   navigate("/login"); // new user bhi login kare
     // }
-          //  navigate("/login");
-           navigate("/register")
+        
+          //  navigate("/register")
        } catch (error) {
            alert(error.response.data.message)
        }

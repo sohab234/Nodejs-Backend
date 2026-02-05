@@ -1,54 +1,82 @@
-// import { json } from "express"
-import api from "../api"
-import { useEffect, useState } from "react"
-
-
+import api from "../api";
+import TodoList from "./TodoList";
+import { useEffect, useState } from "react";
 
 function Dashboard() {
-
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await api.get("/api/v1/user", {
+          headers: {
+            "x-auth-token": localStorage.getItem("token"),
+          },
+        });
 
-  //    const fetchUser = async () => {
-  //   const res = await api.get("/api/v1/user");
-  //   setUser(res.data.data);
-  // };
+        console.log("API user master:" , res.data);
 
-  // fetchUser();
+        setUser(res.data.data);
+        // optional: cache user
+        localStorage.setItem("user", JSON.stringify(res.data.data));
+      } catch (error) {
+        console.log(
+          "Dashboard error:",
+          error.response?.data || error.message
+        );
+      }
+    };
 
-    // component mount hone par data load
-    const storeUser = localStorage.getItem("user")
-    console.log(storeUser);
-    
-
-    if (storeUser) {
-      setUser(JSON.parse(storeUser))
-    }
-
-
-  }, []) //empty dependency siruf ek bar chalege
+    fetchUser();
+  }, []);
 
   if (!user) {
-    return <p>Loading user data...</p>
+    return <p style={{ padding: 20 }}>Loading user data...</p>;
   }
 
   return (
-    <div className="" style={{ padding: "20px" }}>
-      <h1>Dashboard</h1>
-      <p>
-        <b>username:</b> {user.username}
+    <div style={{ maxWidth: 480, margin: "24px auto", padding: 20, borderRadius: 8, boxShadow: "0 6px 18px rgba(0,0,0,0.06)" ,fontFamily: "sans-serif" }}>
+      <h2 style={{ margin: "0 0 12px" }}>Dashboard</h2>
+
+     <div style={{ marginBottom: 8 }}>
+        <strong>Username:</strong> {user.username}
+      </div>
+
+      <div style={{ marginBottom: 12 }}>
+        <strong>Email:</strong> {user.email}
+      </div>
+
+      <p style={{ color: "#b91c1c", marginBottom: 12 }}>
+        Password security reasons ki wajah se show nahi hota
       </p>
 
-      <p>
-        <b>Email:</b> {user.email}
-      </p>
-
-       <p style={{ color: "red" }}>
-        Password security reasons ki wajah se show nahi hota 
-      </p>
+       <TodoList />
+     <div style={{ display: "flex", gap: 8 }}>
+         <button
+          onClick={() => {
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            window.location.href = "/login";
+          }}
+          style={{ padding: "8px 12px", background: "#ef4444", color: "#fff", border: "none", borderRadius: 6, cursor: "pointer" }}
+        >
+          Logout
+        </button>
+        <a href="/register" style={{ alignSelf: "center", color: "#2563eb", textDecoration: "none" }}>Register</a>
+    
+     </div>
     </div>
   );
 }
 
-export default Dashboard; 
+export default Dashboard;
+// import TodoList from "../components/TodoList";
+// import api from "../api";
+// export default function Dashboard() {
+//   return (
+//     <div>
+//       <h2>Dashboard</h2>
+//       <TodoList />
+//     </div>
+//   );
+// }
