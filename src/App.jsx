@@ -3,6 +3,7 @@ import Login from './Pages/Login'
 import Register from './Pages/Register'
 import ProtectedRoute from './Component/ProtectedRoute'
 import Dashboard from './Component/Dashedboard'
+import Header from './Component/Header'
 
 import './App.css'
 
@@ -10,24 +11,20 @@ import './App.css'
 function App() {
   
   return (
-  
-     <Routes>
-       <Route path="/" element={<Navigate to="/login" />} />
-      <Route path ="/login" element={<Login/>}/>
-      <Route path ="/register" element={<Register/>}/>
-     {/* <Route
-  path="/dashboard"
-  element={
-    <ProtectedRoute>
-      <Dashboard />
-    </ProtectedRoute>
-  }
-/> */}
+    <>
+      <Header />
+      <div className="app-root">
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
-    <Route element={<ProtectedRoute/>}>
-        <Route path="/dashboard" element={<Dashboard/>}/>
-    </Route>
-  </Routes>
+          <Route element={<ProtectedRoute /> }>
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Route>
+        </Routes>
+      </div>
+    </>
   )
 }
 

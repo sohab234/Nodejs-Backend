@@ -1,6 +1,7 @@
 
 
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../api";
 import "./TodoList.css";
 
@@ -10,12 +11,24 @@ export default function TodoList() {
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const navigate = useNavigate();
+
+  const handleAuthError = (err) => {
+    if (err?.response?.status === 401) {
+      localStorage.removeItem("token");
+      navigate("/login");
+      return true;
+    }
+    return false;
+  };
+
   const fetchTodos = async () => {
     try {
       setLoading(true);
       const res = await api.get("/api/v1/todo");
       setTodos(res.data?.data || []);
     } catch (err) {
+      if (handleAuthError(err)) return;
       console.log("Fetch error:", err.response?.data || err.message);
     } finally {
       setLoading(false);
@@ -35,6 +48,7 @@ export default function TodoList() {
       setDescription("");
       fetchTodos();
     } catch (err) {
+      if (handleAuthError(err)) return;
       console.log("Create error:", err.response?.data || err.message);
     }
   };
@@ -44,15 +58,17 @@ export default function TodoList() {
       await api.delete(`/api/v1/todo/${id}`);
       fetchTodos();
     } catch (err) {
+      if (handleAuthError(err)) return;
       console.log("Delete error:", err.response?.data || err.message);
     }
   };
 
   const toggleComplete = async (todo) => {
     try {
-      await api.put(`/api/v1/todo/${todo._id}`, { isCompleted: !todo.isCompleted });
+      await api.put(`/api/v1/todo/${todo._1d || todo._id}`, { isCompleted: !todo.isCompleted });
       fetchTodos();
     } catch (err) {
+      if (handleAuthError(err)) return;
       console.log("Update error:", err.response?.data || err.message);
     }
   };
@@ -94,19 +110,21 @@ export default function TodoList() {
                   className="todo-checkbox"
                 />
                 <div className="todo-text">
-                  <div className={`todo-title ${todo.isCompleted ? "completed" : ""}`}>
-                    {todo.titel}
-                  </div>
-                  <div className={`todo-description ${todo.isCompleted ? "completed" : ""}`}>
-                    {todo.description}
+                  <div className="todo-text-box">
+                    <div className={`todo-title ${todo.isCompleted ? "completed" : ""}`}>
+                      {todo.titel}
+                    </div>
+                    <div className={`todo-description ${todo.isCompleted ? "completed" : ""}`}>
+                      {todo.description}
+                    </div>
                   </div>
                 </div>
               </div>
               <div className="todo-actions">
-                <button className="btn-complete" onClick={() => toggleComplete(todo)}>
+                <button type="button" className="btn-complete" onClick={() => toggleComplete(todo)}>
                   {todo.isCompleted ? "Undo" : "Done"}
                 </button>
-                <button className="btn-delete" onClick={() => deleteTodo(todo._id)}>
+                <button type="button" className="btn-delete" onClick={() => deleteTodo(todo._id)}>
                   Delete
                 </button>
               </div>

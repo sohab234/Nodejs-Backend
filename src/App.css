@@ -95,3 +95,51 @@
    color: rgb(141, 74, 204);
    font-family: "Hoobi" sans-serif;
 } */
+
+/* App background and header */
+body, #root {
+   height: 100%;
+}
+body {
+   background: linear-gradient(180deg, #f3f4f6 0%, #e6eef8 100%);
+}
+
+.app-header {
+   width: 100%;
+   position: fixed;
+   top: 0;
+   left: 0;
+   height: 56px;
+   display: flex;
+   align-items: center;
+   justify-content: flex-end;
+   padding: 0 16px;
+   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+   background: rgba(255,255,255,0.9);
+   z-index: 40;
+}
+
+.header-right {
+   display: flex;
+   gap: 12px;
+   align-items: center;
+}
+
+.btn-logout {
+   padding: 8px 12px;
+   background: #ef4444;
+   color: #fff;
+   border: none;
+   border-radius: 6px;
+   cursor: pointer;
+}
+
+.link-register {
+   color: #2563eb;
+   text-decoration: none;
+   font-weight: 500;
+}
+
+.app-root {
+   padding-top: 72px; /* leave space for fixed header */
+}
